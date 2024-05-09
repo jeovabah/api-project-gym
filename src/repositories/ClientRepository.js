@@ -28,6 +28,10 @@ class ClientsRepository {
     }
     await client.destroy();
   }
+
+  async quantityAll() {
+    return await Clients.count();
+  }
 }
 
 module.exports = new ClientsRepository();

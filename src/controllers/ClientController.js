@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/unic/:id', async (req, res) => {
   const { id } = req.params;
   try {
     const client = await clientsService.getClientById(id);
@@ -27,7 +27,6 @@ router.get('/:id', async (req, res) => {
 
 router.post('/add', async (req, res) => {
   const clientData = req.body;
-  console.log(clientData);
   try {
     const newClient = await clientsService.createClient(clientData);
     return res.status(201).json(buildSuccessResponse(newClient));
@@ -53,7 +52,15 @@ router.delete('/delete/:id', async (req, res) => {
     await clientsService.deleteClient(id);
     return res.status(204).json(buildSuccessResponse(null, "Cliente deletado com sucesso"))
   } catch (err) {
-    console.log(err?.message);
+    return res.status(400).json(buildErrorResponse(err, err?.message));
+  }
+});
+
+router.get('/quantityAll', async (req, res) => {
+  try {
+    const count = await clientsService.quantityAll();
+    return res.status(200).json(buildSuccessResponse({activeClients: count}, "Quantidade de clientes ativos"))
+  } catch (err) {
     return res.status(400).json(buildErrorResponse(err, err?.message));
   }
 });
