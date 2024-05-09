@@ -1,23 +1,23 @@
 {
   "development": {
     "username": "root",
-    "password": "password",
+    "password": "HzqWRsMsITRECdkvBiOKKWETwxZjJAzb",
     "database": "gym",
-    "host": "127.0.0.1",
+    "host": "roundhouse.proxy.rlwy.net",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
     "password": null,
     "database": "autofb",
-    "host": "127.0.0.1",
+    "host": "roundhouse.proxy.rlwy.net",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
-    "password": "password",
+    "password": "HzqWRsMsITRECdkvBiOKKWETwxZjJAzb",
     "database": "gym",
-    "host": "127.0.0.1",
+    "host": "roundhouse.proxy.rlwy.net",
     "dialect": "mysql"
   }
 }
