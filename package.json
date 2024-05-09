@@ -10,7 +10,7 @@
     "migrate": "npx sequelize-cli db:migrate",
     "create-migrate": "npx sequelize-cli migration:generate --name ",
     "revert-migrate": "npx sequelize-cli db:migrate:undo",
-    "serve": "node src/index.js"
+    "serve": "node index.js"
   },
   "keywords": [],
   "author": "",
