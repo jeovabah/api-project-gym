@@ -3,6 +3,7 @@
     "username": "root",
     "password": "HzqWRsMsITRECdkvBiOKKWETwxZjJAzb",
     "database": "gym",
+    "port": 55981,
     "host": "roundhouse.proxy.rlwy.net",
     "dialect": "mysql"
   },
@@ -16,6 +17,7 @@
   "production": {
     "username": "root",
     "password": "HzqWRsMsITRECdkvBiOKKWETwxZjJAzb",
+    "port": 55981,
     "database": "gym",
     "host": "roundhouse.proxy.rlwy.net",
     "dialect": "mysql"
