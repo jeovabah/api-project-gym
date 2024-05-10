@@ -35,8 +35,9 @@ router.post('/add', async (req, res) => {
   }
 });
 
-router.put('/client/:id', async (req, res) => {
+router.put('/update/:id', async (req, res) => {
   const { id } = req.params;
+  console.log('entrnado aqui', req.body)
   const clientData = req.body;
   try {
     const updatedClient = await clientsService.updateClient(id, clientData);
