@@ -35,7 +35,7 @@ router.post('/add', async (req, res) => {
   }
 });
 
-router.put('/:id', async (req, res) => {
+router.put('/client/:id', async (req, res) => {
   const { id } = req.params;
   const clientData = req.body;
   try {
