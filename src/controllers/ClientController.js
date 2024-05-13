@@ -37,7 +37,6 @@ router.post('/add', async (req, res) => {
 
 router.put('/update/:id', async (req, res) => {
   const { id } = req.params;
-  console.log('entrnado aqui', req.body)
   const clientData = req.body;
   try {
     const updatedClient = await clientsService.updateClient(id, clientData);
@@ -61,6 +60,15 @@ router.get('/quantityAll', async (req, res) => {
   try {
     const count = await clientsService.quantityAll();
     return res.status(200).json(buildSuccessResponse({activeClients: count}, "Quantidade de clientes ativos"))
+  } catch (err) {
+    return res.status(400).json(buildErrorResponse(err, err?.message));
+  }
+});
+
+router.get('/daysTrainner', async (req, res) => {
+  try {
+    const clients = await clientsService.getDaysTrainnerClients();
+    return res.status(200).json(buildSuccessResponse(clients, "Dias da semana de treino dos clientes"))
   } catch (err) {
     return res.status(400).json(buildErrorResponse(err, err?.message));
   }

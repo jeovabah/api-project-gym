@@ -24,6 +24,10 @@ class ClientsService {
   async quantityAll() {
     return await clientsRepository.quantityAll();
   }
+
+  async getDaysTrainnerClients() {
+    return await clientsRepository.getDaysTrainnerClients();
+  }
 }
 
 module.exports = new ClientsService();
