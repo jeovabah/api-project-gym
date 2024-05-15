@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/unic/:id', async (req, res) => {
   const { id } = req.params;
   try {
     const trainer = await trainersService.getTrainerById(id);
@@ -25,7 +25,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.post('/', async (req, res) => {
+router.post('/add', async (req, res) => {
   const trainerData = req.body;
   try {
     const newTrainer = await trainersService.createTrainer(trainerData);
@@ -35,7 +35,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.put('/:id', async (req, res) => {
+router.put('update/:id', async (req, res) => {
   const { id } = req.params;
   const trainerData = req.body;
   try {
@@ -46,7 +46,7 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('delete/:id', async (req, res) => {
   const { id } = req.params;
   try {
     await trainersService.deleteTrainer(id);
