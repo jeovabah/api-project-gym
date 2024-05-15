@@ -6,5 +6,5 @@ const router = Router();
 
 router.use('/', AppController);
 router.use('/client', ClientController);
-router.use('/driver', TrainerController);
+router.use('/trainer', TrainerController);
 module.exports = router;    
