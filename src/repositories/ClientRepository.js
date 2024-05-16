@@ -35,7 +35,13 @@ class ClientsRepository {
 
   async getDaysTrainnerClients() {
     try {
-      const clientsAll = await Clients.findAll();
+      const clientsAll = await Clients.findAll({
+        include: [{
+          model: Trainers,
+          as: 'trainer', // certifique-se que esse alias corresponde ao definido no modelo Clients
+          attributes: ['id', 'name', 'specialty'] // Especifique os atributos que você quer incluir do treinador
+        }]
+      });
       
       // Verifica os dados recebidos
   
@@ -45,7 +51,7 @@ class ClientsRepository {
         "Quarta-feira": {},
         "Quinta-feira": {},
         "Sexta-feira": {},
-        "Sabado": {},
+        "Sábado": {},
         "Domingo": {}
       };
   
@@ -68,7 +74,12 @@ class ClientsRepository {
                 id: client.id,
                 name: client.name,
                 statusPaid: client.statusPaid,
-                dayToPay: client.dayToPay
+                dayToPay: client.dayToPay,
+                trainer: client.trainer ? {
+                  id: client.trainer.id,
+                  name: client.trainer.name,
+                  specialty: client.trainer.specialty
+                } : null
               });
             });
           }
