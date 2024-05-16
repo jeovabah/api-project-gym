@@ -1,4 +1,5 @@
 const { Clients } = require('../models'); 
+const { Trainers } = require('../models');
 
 class ClientsRepository {
   async getAllClients() {
