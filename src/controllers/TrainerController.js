@@ -35,7 +35,7 @@ router.post('/add', async (req, res) => {
   }
 });
 
-router.put('update/:id', async (req, res) => {
+router.put('/update/:id', async (req, res) => {
   const { id } = req.params;
   const trainerData = req.body;
   try {
@@ -46,7 +46,7 @@ router.put('update/:id', async (req, res) => {
   }
 });
 
-router.delete('delete/:id', async (req, res) => {
+router.delete('/delete/:id', async (req, res) => {
   const { id } = req.params;
   try {
     await trainersService.deleteTrainer(id);
