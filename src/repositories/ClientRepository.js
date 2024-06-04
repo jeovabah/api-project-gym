@@ -1,5 +1,6 @@
 const { Clients } = require('../models'); 
 const { Trainers } = require('../models');
+const { Payments } = require('../models')
 
 class ClientsRepository {
   async getAllClients() {
@@ -19,7 +20,27 @@ class ClientsRepository {
     if (!client) {
       throw new Error('Cliente não encontrado');
     }
-    return await client.update(clientData);
+    
+    try {
+      const updatedClient = await client.update(clientData);
+  
+      if (clientData?.statusPaid === true) {
+        const paymentData = {
+          clientId: id,
+          month: new Date().getMonth() + 1,  
+          year: new Date().getFullYear(),
+          amountPaid: clientData?.amountPaid || 0,
+          statusPaid: true,
+          paymentDate: new Date()
+        };
+  
+        await Payments.create(paymentData);
+      }
+  
+      return updatedClient;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async deleteClient(id) {
