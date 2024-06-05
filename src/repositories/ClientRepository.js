@@ -23,8 +23,10 @@ class ClientsRepository {
     
     try {
       const updatedClient = await client.update(clientData);
+      
+      const clientHasPaymentThisMonth = await this.verifyClienPaymentOnThisMonth(id)
   
-      if (clientData?.statusPaid === true) {
+      if (clientData?.statusPaid === true && !clientHasPaymentThisMonth) {
         const paymentData = {
           clientId: id,
           month: new Date().getMonth() + 1,  
@@ -41,6 +43,25 @@ class ClientsRepository {
     } catch (error) {
       throw error;
     }
+  }
+
+  async verifyClienPaymentOnThisMonth(clientId) {
+    const month = new Date().getMonth() + 1;
+    const year = new Date().getFullYear();
+
+    const payment = await Payments.findOne({
+      where: {
+        clientId: clientId,
+        month: month,
+        year: year
+      }
+    });
+
+    if (payment) {
+      return true;
+    }
+
+    return false;
   }
 
   async deleteClient(id) {
