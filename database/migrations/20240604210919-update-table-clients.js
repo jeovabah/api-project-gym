@@ -9,7 +9,7 @@ module.exports = {
       defaultValue: null,
     })
 
-    await queryInterface.addColumn('Trainers', 'dateOfBirth', {
+    await queryInterface.addColumn('Clients', 'dateOfBirth', {
       type: Sequelize.DATE,
       allowNull: true,
       defaultValue: null,
@@ -18,6 +18,6 @@ module.exports = {
 
   async down (queryInterface, Sequelize) {
     await queryInterface.removeColumn('Clients', 'trainingSheetDescription')
-    await queryInterface.removeColumn('Trainers', 'dateOfBirth')
+    await queryInterface.removeColumn('Clients', 'dateOfBirth')
   }
 };

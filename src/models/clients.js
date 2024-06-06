@@ -28,7 +28,9 @@ module.exports = (sequelize, DataTypes) => {
         model: 'Trainers',
         key: 'id'
       }
-    }
+    },
+    trainingSheetDescription: DataTypes.STRING,
+    dateOfBirth: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'Clients',
