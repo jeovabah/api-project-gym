@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const { Clients } = require('../models'); 
 const { Payments } = require('../models')
 
@@ -39,22 +40,41 @@ class PaymentRepository {
   }
 
   async verifyPaymentsClientsOnThisMonth() {
-    const currentMonth = new Date().getMonth() + 1;
-    const clients = await Clients.findAll({
+    const currentMonth = new Date().getMonth() + 1; 
+    const currentYear = new Date().getFullYear();
+  
+    const payments = await Payments.findAll({
+      include: [{
+        model: Clients,
+        as: 'client'
+      }],
       where: {
         statusPaid: true,
-        month: currentMonth
+        [Op.or]: [
+          { month: { [Op.lt]: currentMonth } },  
+          { year: { [Op.lt]: currentYear } }    
+        ]
       }
     });
   
-    if (clients.length > 0) {
-      await Clients.update({ statusPaid: false }, {
+    for (const payment of payments) {
+      await Payments.update({ statusPaid: false }, {
         where: {
-          id: clients.map(client => client.id)
+          id: payment.id
         }
       });
+  
+      if (payment.client && payment.client.statusPaid) {
+        await Clients.update({ statusPaid: false }, {
+          where: {
+            id: payment.clientId
+          }
+        });
+      }
     }
   }
+  
+  
   
 
 
