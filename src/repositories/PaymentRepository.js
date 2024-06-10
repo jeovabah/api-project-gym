@@ -38,6 +38,26 @@ class PaymentRepository {
     }
   }
 
+  async verifyPaymentsClientsOnThisMonth() {
+    const currentMonth = new Date().getMonth() + 1;
+    const clients = await Clients.findAll({
+      where: {
+        statusPaid: true,
+        month: currentMonth
+      }
+    });
+  
+    if (clients.length > 0) {
+      await Clients.update({ statusPaid: false }, {
+        where: {
+          id: clients.map(client => client.id)
+        }
+      });
+    }
+  }
+  
+
+
 }
 
 module.exports = new PaymentRepository();

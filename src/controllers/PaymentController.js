@@ -21,5 +21,14 @@ router.get('/totalPaid', async (req, res) => {
   }
 })
 
+router.post('/verifyPaymentsClients', async (req, res) => {
+  try {
+    const payments = await paymentService.verifyPaymentsClients();
+    return res.status(200).json(buildSuccessResponse(payments));
+  } catch (err) {
+    return res.status(400).json(buildErrorResponse(err, err?.message));
+  }
+})
+
 
 module.exports = router;
